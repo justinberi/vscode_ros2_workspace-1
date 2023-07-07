@@ -6,8 +6,17 @@ RUN apt-get update \
       htop \
       build-essential \
       htop \
-      ros-humble-rviz2 \
-      libqt5svg5 \
+   #
+   # Clean up
+   && apt-get autoremove -y \
+   && apt-get clean -y \
+   && rm -rf /var/lib/apt/lists/*
+ENV DEBIAN_FRONTEND=dialog
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update \
+   && apt-get -y install --no-install-recommends \
+      ros-humble-desktop \
    #
    # Clean up
    && apt-get autoremove -y \
